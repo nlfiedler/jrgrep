@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- $Id: README.html 979 2003-11-03 00:47:56Z nfiedler $ -->
+
+<head>
+  <meta content="HTML Tidy for Linux/x86 (vers 1st April 2003), see www.w3.org"
+        name="generator" />
+
+  <title>JRGrep README</title>
+</head>
+
+<body>
+  <h1>JRGrep README</h1>
+
+  <h2>What is JRGrep?</h2>
+
+  <p>This Java application is basically a recursive file finder. You
+  can search for files based on their filename, their contents, or
+  both.</p>
+
+  <h2>Requirements</h2>
+
+  <p>The system must have a Java runtime version 1.4 or better
+  installed. See
+  <a href="http://java.sun.com/">http://java.sun.com/</a> for acquiring
+  a runtime environment.</p>
+
+  <h2>Using JRGrep</h2>
+
+  <p>Start the program by invoking the <code>java</code> command like
+  so:</p>
+  <pre>
+java -jar jrgrep.jar
+</pre>
+
+  <p>This will launch the program and from there you can utilize the
+  graphical user interface to perform the search. The application is
+  reasonably intuitable. The file name and pattern text fields expect
+  regular expressions. If you are not familiar with regular
+  expressions, search the web or read the book &quot;Mastering Regular
+  Expressions&quot; by Jeffrey E. F. Friedl. Basically, typing a word
+  or phrase will work.</p>
+
+  <h3>Command-line Interface:</h3>
+
+  <p>JRGrep sports a command-line interface, accessible through the
+  com.bluemarsh.jrgrep.tty class. Use &#39;-h&#39; to access the
+  help.</p>
+
+  <h2>Building JRGrep</h2>
+
+  <p>To compile the program from source code, you will need the JRGrep
+  source package and <a href="http://ant.apache.org/">Apache Ant</a>.
+  With Ant installed and the JRGrep source extracted to the current
+  directory, type the following to compile the source code:</p>
+  <pre>
+ant compile
+</pre>
+</body>
+</html>

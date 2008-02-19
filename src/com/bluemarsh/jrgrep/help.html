@@ -1,0 +1,102 @@
+<html>
+
+<body>
+
+<h2>JRGrep Help</h2>
+
+<p>Thank you for using JRGrep. This page describes some of the less
+intuitable facets of this program.</p>
+
+<h3>Pattern Flags</h3>
+
+<p>Regular expressions may contain flags that enable or disable certain
+behavior in the regular expression engine. They are enabled using the
+special syntax:</p>
+
+<pre>
+(?dimsux-dimsux)
+</pre>
+
+<p>Letters preceeded by a '<code>-</code>' will turn off the feature.
+The flags must appear before the pattern to have an affect. That is,
+the pattern "<code>nocase(?i)</code>" will not match NOCASE because
+the flag is at the end of the expression. By the same token, this can
+be used to some advantage. The expression
+"<code>UPPER(?i)NOCASE(?-i)lower</code>" will match either
+"UPPERnocaselower" or "UPPERNOCASElower" or any combination of upper
+and lower case characters in the "NOCASE" subsequence.</p>
+
+<p>The flags and their meanings are as follows:</p>
+
+<table border="1">
+  <tr>
+    <th>Flag</th>
+    <th>Meaning</th>
+  </tr>
+
+  <tr>
+    <td>d</td>
+    <td><strong>unix lines</strong>; only the '<code>\n</code>' character
+    is recognized as a line terminator in this mode.</td>
+  </tr>
+
+  <tr>
+    <td>i</td>
+    <td><strong>case insensitive</strong>; enables case-insensitive
+    matching. This feature may impose a performance penalty.</td>
+  </tr>
+
+  <tr>
+    <td>m</td>
+    <td><strong>multi-line</strong> mode; in multiline mode the expressions
+    <code>^</code> and <code>$</code> match just after or just before,
+    respectively, a line terminator or the end of the input sequence.
+    By default these expressions only match at the beginning and end
+    of the entire input sequence.</td>
+  </tr>
+
+  <tr>
+    <td>s</td>
+    <td><strong>single-line</strong> mode; the <code>.</code> (period)
+    metacharacter will match line terminators. Normally it does not.</td>
+  </tr>
+
+  <tr>
+    <td>u</td>
+    <td><strong>Unicode case</strong> mode; when used with the
+    <code>i</code> flag this performs the case-insensitive matching in
+    a manner consistent with the Unicode Standard. By default, characters
+    are assumed to be US-ASCII. This feature may impose a performance
+    penalty.</td>
+  </tr>
+
+  <tr>
+    <td>x</td>
+    <td><strong>comments</strong>; in this mode, whitespace is ignored
+    and embedded comments starting with <code>#</code> are ignored until
+    the end of the line.</td>
+  </tr>
+</table>
+
+<h4>Some examples</h4>
+
+<table border="1">
+  <tr>
+    <th>Pattern</th>
+    <th>Matches</th>
+  </tr>
+
+  <tr>
+    <td>(?i)nocase</td>
+    <td>NOCASE, nocase, NOcase, NoCaSe ...</td>
+  </tr>
+
+  <tr>
+    <td>(?ix)pattern # comment</td>
+    <td>pattern, PATTERN, PaTtErN ... (and ignores the comment)</td>
+  </tr>
+</table>
+
+</body>
+
+</html>

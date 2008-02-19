@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+        Copyright (C) 2001-2005 Nathan Fiedler
+
+  Use Apache Ant to process this build file and create a build of JRGrep.
+
+  $Id: build.xml 2011 2005-09-12 06:13:01Z nfiedler $
+-->
+
+<project name="JRGrep" default="dist" basedir=".">
+  <property file="build.properties"/>
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="pkgpath" value="com/bluemarsh/jrgrep"/>
+  <property name="compile.debug" value="on"/>
+  <property name="compile.deprecation" value="on"/>
+  <property name="compile.source" value="1.4"/>
+  <property name="compile.target" value="1.4"/>
+
+  <target name="clean" description="Removes the build artifacts.">
+    <delete dir="${build.dir}"/>
+    <delete>
+      <fileset dir="." includes="*.zip"/>
+      <fileset dir="." includes="*.jar"/>
+    </delete>
+  </target>
+
+  <target name="build" description="Compiles the application.">
+    <mkdir dir="${build.dir}"/>
+    <javac srcdir="${src.dir}" destdir="${build.dir}" debug="${compile.debug}"
+           deprecation="${compile.deprecation}" source="${compile.source}"
+           target="${compile.target}"/>
+    <copy todir="${build.dir}">
+      <fileset dir="${src.dir}">
+        <include name="com/**/*.properties"/>
+        <include name="${pkgpath}/**/*.html"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="dist" depends="build" description="Generates the distributable.">
+    <!-- Get the release version number from the builder. -->
+    <input message="Enter JRGrep version number (x.y[.z]):"
+           addproperty="version"/>
+
+    <jar jarfile="jrgrep.jar" basedir="${build.dir}">
+      <exclude name="**/test/**"/>
+      <manifest>
+        <attribute name="Built-By" value="${user.name}"/>
+        <attribute name="Main-Class" value="com.bluemarsh.jrgrep.Main"/>
+      </manifest>
+    </jar>
+
+    <zip destfile="jrgrep-${version}.zip">
+      <zipfileset dir="." prefix="jrgrep-${version}">
+        <include name="*.txt"/>
+        <include name="*.html"/>
+        <include name="jrgrep.jar"/>
+      </zipfileset>
+    </zip>
+
+    <zip destfile="jrgrep-src-${version}.zip">
+      <zipfileset dir="." prefix="jrgrep-src-${version}">
+        <exclude name="*.jar"/>
+        <exclude name="*.zip"/>
+        <exclude name="**/build.properties"/>
+        <exclude name="${build.dir}/**"/>
+        <exclude name="nbproject/**"/>
+      </zipfileset>
+    </zip>
+
+    <!-- Calculate the file checksums. -->
+    <antcall target="checksum">
+      <param name="file" value="jrgrep-${version}.zip"/>
+    </antcall>
+    <antcall target="checksum">
+      <param name="file" value="jrgrep-src-${version}.zip"/>
+    </antcall>
+  </target>
+
+  <target name="checksum">
+    <checksum file="${file}" algorithm="SHA" property="sum"/>
+    <echo level="info">${sum}  ${file}</echo>
+  </target>
+
+  <!-- Run the program. -->
+  <target name="run" depends="build" description="Runs the application.">
+    <java classname="com.bluemarsh.jrgrep.Main" fork="yes"
+          classpath="${build.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,46 @@
+JRGREP HISTORY
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$Id: HISTORY.txt 2011 2005-09-12 06:13:01Z nfiedler $
+
+2.1 - September 11, 2005
+- Centered the main window by default, sizing to fit the screen if it
+  is too small for the default window size.
+- Fixed bug 870: stop scanning file once a match is found.
+
+2.0 - April 19, 2002
+- Fixed bug #297: window contents resize as the window resizes.
+- Fixed bug #298: added regular expression support, per new JDK 1.4
+  java.util.regex package. All of the fields, except for the
+  "look in" field, are evaluated as regular expressions.
+- Fixed bug #301: all matching files are searched properly.
+- Fixed bug #445: empty "look in" directory is treated as ".".
+- Fixed bug #448: validate the existence of "look in" directory.
+- Fixed bug #449: validate the regex patterns before searching.
+- Fixed bug #452: the results list was not being cleared when a
+  new search was initiated.
+- Implemented #444: remember the geometry of the program window.
+- Implemented #446: ignore directories using a regex pattern.
+- Implemented #447: support "single-line" mode in which the '.'
+  metacharacter matches line terminators. Must prefix the regex
+  with (?s) for this option to work.
+- Implemented #450: remember field values indefinitely.
+- Implemented #453: provide online help to explain how to use the
+  regular expression flags for enabling and disabling features.
+- Implemented #454: added command-line interface through the
+  com.bluemarsh.jrgrep.tty class.
+
+1.4 - December 5, 2000
+- Changed the list from a java.awt.List to a javax.swing.JList.
+
+1.3 - March 13, 1999
+- Fixed line reader so it reads whole lines.
+
+1.2 - February 20, 1999
+- Now strings are localizable via the properties file.
+
+1.1 - October 25, 1998
+- Added multiple filename pattern support.
+
+1.0 - August 2, 1998
+- filename wildcards * and ?
+- simple search feature
